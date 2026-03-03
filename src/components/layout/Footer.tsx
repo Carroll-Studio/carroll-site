@@ -62,10 +62,10 @@ export default function Footer() {
               Say hello
             </h4>
             <div className="flex flex-col gap-3 text-sm text-bg/70">
-              <a href="mailto:hello@neighborhoodstudio.co" className="hover:text-bg transition-colors duration-300">
-                hello@neighborhoodstudio.co
+              <a href="mailto:ripley@cohesium.co" className="hover:text-bg transition-colors duration-300">
+                ripley@cohesium.co
               </a>
-              <span>(555) 123-4567</span>
+              <span>202-805-4287</span>
               <span>Richmond, VA</span>
             </div>
           </div>
