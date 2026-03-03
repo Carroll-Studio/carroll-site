@@ -31,7 +31,7 @@ function MarqueeRow({
       style={{
         fontFamily: 'var(--font-impact)',
         fontWeight: 900,
-        fontSize: 'clamp(4rem, 10vw, 12rem)',
+        fontSize: 'clamp(2rem, 7vw, 12rem)',
         lineHeight: 0.9,
         letterSpacing: '0.02em',
         textTransform: 'uppercase' as const,
@@ -141,7 +141,7 @@ export default function ProjectDetailPage() {
         ref={titleSectionRef}
         style={{
           paddingTop: '80px',       // clear fixed navbar
-          height: '44vh',
+          maxHeight: '44vh',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
@@ -182,7 +182,7 @@ export default function ProjectDetailPage() {
 
 
       {/* ── Project info ────────────────────────────────────────────── */}
-      <div className="px-8 md:px-16 py-16">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 max-w-6xl mx-auto">
 
           <div className="flex-1">
@@ -222,7 +222,7 @@ export default function ProjectDetailPage() {
 
       {/* ── Client Description ────────────────────────────────────────── */}
       {project.clientDescription && (
-        <div className="px-8 md:px-16 py-16 border-t border-white/10">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16 border-t border-white/10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white mb-8" style={{
               fontFamily: 'var(--font-display)',
@@ -240,7 +240,7 @@ export default function ProjectDetailPage() {
 
       {/* ── Challenges ────────────────────────────────────────────────── */}
       {project.challenges && project.challenges.length > 0 && (
-        <div className="px-8 md:px-16 py-16 border-t border-white/10">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16 border-t border-white/10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white mb-12" style={{
               fontFamily: 'var(--font-display)',
@@ -269,7 +269,7 @@ export default function ProjectDetailPage() {
 
       {/* ── The Original Design ────────────────────────────────────────── */}
       {(project.id === 'ember-restaurant' || project.id === 'swift-towing' || project.id === 'peak-roofing') && (
-        <div className="px-8 md:px-16 py-16 border-t border-white/10">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16 border-t border-white/10">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-white mb-8" style={{
               fontFamily: 'var(--font-display)',
@@ -297,7 +297,8 @@ export default function ProjectDetailPage() {
                 title={`Original ${project.title} Website`}
                 className="w-full"
                 style={{
-                  height: '600px',
+                  height: 'auto',
+                  minHeight: '400px',
                   border: 'none',
                   display: 'block',
                 }}
@@ -312,7 +313,7 @@ export default function ProjectDetailPage() {
 
       {/* ── Insights ────────────────────────────────────────────────────── */}
       {project.insights && project.insights.length > 0 && (
-        <div className="px-8 md:px-16 py-16 border-t border-white/10">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16 border-t border-white/10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-white mb-12" style={{
               fontFamily: 'var(--font-display)',
@@ -346,7 +347,7 @@ export default function ProjectDetailPage() {
 
       {/* ── What We Built ────────────────────────────────────────────────── */}
       {(project.id === 'ember-restaurant' || project.id === 'swift-towing' || project.id === 'peak-roofing') && (
-        <div className="px-8 md:px-16 py-16 border-t border-white/10">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-16 border-t border-white/10">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-white mb-8" style={{
               fontFamily: 'var(--font-display)',
@@ -367,7 +368,8 @@ export default function ProjectDetailPage() {
                 title={`${project.title} Landing Page Preview`}
                 className="w-full"
                 style={{
-                  height: '700px',
+                  height: 'auto',
+                  minHeight: '500px',
                   border: 'none',
                   display: 'block',
                 }}

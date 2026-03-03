@@ -8,6 +8,8 @@ import DraggableCube from '../components/ui/DraggableCube'
 import EarthSphere from '../components/ui/EarthSphere'
 import { services } from '../data/services'
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
 function CheckOutOurWork() {
   const [distance, setDistance] = useState(Infinity)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -34,9 +36,9 @@ function CheckOutOurWork() {
   const vibrationAmount = vibrationIntensity * vibrationIntensity * 12
 
   return (
-    <div ref={containerRef} className="relative mt-48 mb-8">
+    <div ref={containerRef} className="relative mt-12 md:mt-48 mb-8">
       {/* Left arrow pointing right */}
-      <svg className="absolute left-[-100px] top-1/2 -translate-y-1/2 w-28 h-28" viewBox="0 0 120 120" style={{ filter: 'drop-shadow(0 0 3px rgba(104, 211, 145, 0.5))' }}>
+      <svg className="hidden md:block absolute left-[-100px] top-1/2 -translate-y-1/2 w-28 h-28" viewBox="0 0 120 120" style={{ filter: 'drop-shadow(0 0 3px rgba(104, 211, 145, 0.5))' }}>
         <path
           d="M 10 40 Q 60 80 80 60"
           stroke="#68d391"
@@ -49,7 +51,7 @@ function CheckOutOurWork() {
       </svg>
 
       {/* Right arrow pointing left */}
-      <svg className="absolute right-[-100px] top-1/2 -translate-y-1/2 w-28 h-28" viewBox="0 0 120 120" style={{ filter: 'drop-shadow(0 0 3px rgba(104, 211, 145, 0.5))' }}>
+      <svg className="hidden md:block absolute right-[-100px] top-1/2 -translate-y-1/2 w-28 h-28" viewBox="0 0 120 120" style={{ filter: 'drop-shadow(0 0 3px rgba(104, 211, 145, 0.5))' }}>
         <path
           d="M 110 40 Q 60 80 40 60"
           stroke="#68d391"
@@ -62,17 +64,17 @@ function CheckOutOurWork() {
       </svg>
 
       <motion.div
-        animate={{
+        animate={!isMobile ? {
           x: (Math.random() - 0.5) * vibrationAmount,
           y: (Math.random() - 0.5) * vibrationAmount,
-        }}
+        } : {}}
         transition={{ duration: 0.05, repeat: Infinity }}
       >
         <Link
           to="/portfolio"
           className="block group"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-center text-text group-hover:text-accent-green transition-colors duration-500 whitespace-nowrap">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-text group-hover:text-accent-green transition-colors duration-500 whitespace-nowrap">
             Check out our work
           </h2>
         </Link>
@@ -93,7 +95,7 @@ export default function HomePage() {
 
         {/* Gold 3D cube — centered above headline */}
         <div className="absolute bottom-[48%] left-1/2 -translate-x-1/2 z-10">
-          <DraggableCube size={300} />
+          <DraggableCube size={isMobile ? 150 : 300} />
         </div>
 
         {/* Headline text — split layout */}
@@ -149,14 +151,14 @@ export default function HomePage() {
             </span>
           </FadeInSection>
           <FadeInSection delay={0.1}>
-            <h2 className="font-display text-6xl md:text-7xl font-bold mt-4 mb-20 text-center">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mt-4 mb-20 text-center">
               We straddle two worlds
             </h2>
           </FadeInSection>
 
-          <div className="grid grid-cols-12 gap-12 items-start min-h-[700px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-start md:min-h-[700px]">
             {/* Left column — Services 1-2 */}
-            <div className="col-span-4">
+            <div className="md:col-span-4">
               <FadeInSection delay={0.2}>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-accent-green mb-8">
                   Brand & Design
@@ -176,7 +178,7 @@ export default function HomePage() {
             </div>
 
             {/* Center — Earth sphere */}
-            <div className="col-span-4 flex flex-col items-center pt-4">
+            <div className="md:col-span-4 flex flex-col items-center pt-4">
               <div>
                 <EarthSphere size={420} sunDirRef={sunDirRef} />
               </div>
@@ -186,7 +188,7 @@ export default function HomePage() {
             </div>
 
             {/* Right column — Services 3-4 */}
-            <div className="col-span-4">
+            <div className="md:col-span-4">
               <FadeInSection delay={0.2}>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-accent-green mb-8">
                   Web Dev & AI Automation

@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-40 pb-20 px-6 md:px-10">
+      <section className="pt-40 pb-20 px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
             <span className="text-xs uppercase tracking-[0.3em] text-accent-green font-semibold">
@@ -17,7 +17,7 @@ export default function ContactPage() {
           <div className="mt-4">
             <AnimatedText
               text="Let's build something remarkable together"
-              className="font-display text-5xl md:text-6xl font-bold leading-[1.05] text-text"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] text-text"
               delay={0.1}
             />
           </div>
@@ -25,9 +25,9 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Info */}
-      <section className="px-6 md:px-10 pb-32">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-10 pb-32">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 xl:gap-20">
             {/* Form */}
             <div className="lg:col-span-3">
               <ContactForm />
@@ -91,7 +91,7 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom Image */}
-      <section className="px-6 md:px-10 pb-16">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-10 pb-16">
         <div className="max-w-7xl mx-auto">
           <ImageReveal
             src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=800&fit=crop"

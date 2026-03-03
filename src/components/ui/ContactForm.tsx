@@ -23,8 +23,8 @@ export default function ContactForm() {
 
   return (
     <FadeInSection>
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <form onSubmit={handleSubmit} className="space-y-6 md:space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16">
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Name
@@ -33,7 +33,7 @@ export default function ContactForm() {
               type="text"
               required
               placeholder="Your name"
-              className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
+              className="w-full bg-transparent border-b border-border py-3 min-h-[44px] text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
             />
           </div>
           <div>
@@ -44,12 +44,12 @@ export default function ContactForm() {
               type="email"
               required
               placeholder="your@email.com"
-              className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
+              className="w-full bg-transparent border-b border-border py-3 min-h-[44px] text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16">
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Company
@@ -57,14 +57,14 @@ export default function ContactForm() {
             <input
               type="text"
               placeholder="Your company"
-              className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
+              className="w-full bg-transparent border-b border-border py-3 min-h-[44px] text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300"
             />
           </div>
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Budget Range
             </label>
-            <select className="w-full bg-transparent border-b border-border py-3 text-text focus:border-accent-green focus:outline-none transition-colors duration-300 appearance-none cursor-pointer">
+            <select className="w-full bg-transparent border-b border-border py-3 min-h-[44px] text-text focus:border-accent-green focus:outline-none transition-colors duration-300 appearance-none cursor-pointer">
               <option value="" className="bg-bg">Select a range</option>
               <option value="5k-10k" className="bg-bg">$5,000 - $10,000</option>
               <option value="10k-25k" className="bg-bg">$10,000 - $25,000</option>
@@ -82,7 +82,7 @@ export default function ContactForm() {
             rows={4}
             required
             placeholder="What are you looking to build?"
-            className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300 resize-none"
+            className="w-full bg-transparent border-b border-border py-3 min-h-[44px] text-text placeholder:text-text-dim focus:border-accent-green focus:outline-none transition-colors duration-300 resize-none"
           />
         </div>
 
