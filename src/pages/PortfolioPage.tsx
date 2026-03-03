@@ -186,10 +186,17 @@ export default function PortfolioPage() {
     <div ref={scrollRef} className="portfolio-snap-container">
       <div className="portfolio-grain" aria-hidden="true" />
 
+      {/* Confidentiality notice banner */}
+      <div className="fixed top-16 left-1/2 -translate-x-1/2 z-40 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-10 py-6 max-w-4xl">
+        <p className="text-base text-white/70 text-center">
+          <span className="text-accent-green font-semibold">Note:</span> Client names, logos, and personal details have been modified to protect confidentiality.
+        </p>
+      </div>
+
       {/* Available badge — fixed bottom-left */}
       <div className="fixed bottom-8 left-8 z-50 flex items-start gap-2.5">
         <span className="mt-[3px] w-2 h-2 rounded-full bg-accent-green flex-shrink-0 animate-dot-blink" />
-        <span className="text-[13px] font-semibold text-white uppercase tracking-[0.15em] leading-[1.4]">
+        <span className="text-[12px] font-semibold text-white uppercase tracking-[0.15em] leading-[1.4]">
           Currently Available<br />For New Projects
         </span>
       </div>

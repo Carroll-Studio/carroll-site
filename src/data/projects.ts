@@ -44,16 +44,16 @@ export const projects: Project[] = [
     year: '2024',
     clientDescription: 'Peak Roofing specializes in residential and commercial roof installation, repair, and maintenance with over 500 completed projects and industry certifications.',
     challenges: [
-      'Previous site was very text-heavy with no visual project examples',
-      'Difficult to explain complex roofing concepts to average homeowner',
-      'High competition from national roofing chains with bigger marketing budgets',
-      'Seasonal business required better lead capture and inquiry management'
+      'Outdated website with dated design patterns that undermined their professionalism',
+      'Lack of visual portfolio — potential customers couldn\'t see quality of past work',
+      'Complex roofing information difficult to communicate to homeowners',
+      'Trust signals like certifications and experience not prominently displayed'
     ],
     insights: [
-      'High-quality project photography was essential to showcase craftsmanship',
-      'Educational content about roof types, materials, and maintenance built authority',
-      'Customer reviews and certifications were major trust indicators',
-      'Clear ROI messaging about roof longevity and energy efficiency resonated'
+      'Professional, modern design establishes immediate credibility and trust',
+      'Clear communication of experience (15+ years) and certifications builds confidence',
+      'Visual focus on quality craftsmanship and lasting protection resonates with homeowners',
+      'Emphasizing "built on trust" differentiates from larger national chains'
     ]
   },
   {
