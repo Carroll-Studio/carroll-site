@@ -1,14 +1,14 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 import PixelCanvas from '../components/ui/PixelCanvas'
 
-function ProjectSection({ project, index }: { project: typeof projects[0]; index: number }) {
+function ProjectSection({ project, index, isMobile }: { project: typeof projects[0]; index: number; isMobile: boolean }) {
   const glowRef = useRef<HTMLDivElement>(null)
 
   const onFrameMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!glowRef.current) return
+    if (isMobile || !glowRef.current) return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -19,44 +19,58 @@ function ProjectSection({ project, index }: { project: typeof projects[0]; index
   }
 
   const onFrameMouseLeave = () => {
-    if (glowRef.current) glowRef.current.style.opacity = '0'
+    if (isMobile || !glowRef.current) return
+    glowRef.current.style.opacity = '0'
   }
+
+  const contentWidth = isMobile ? '90vw' : '70vw'
+  const maxHeight = isMobile ? '50vh' : '68vh'
+  const labelSize = isMobile ? 'text-[9px]' : 'text-[11px]'
+  const buttonMargin = isMobile ? '-0.8rem' : '-1.4rem'
 
   return (
     <section
-      className="portfolio-snap-section relative h-screen flex flex-col items-center justify-center"
-      style={{ paddingTop: '80px' }}
+      className={`portfolio-snap-section relative flex flex-col items-center justify-center ${isMobile ? 'min-h-screen' : 'h-screen'}`}
+      style={{ paddingTop: isMobile ? '60px' : '80px' }}
     >
-      {/* Content wrapper — 70vw, leaves room for logo on both sides */}
-      <div className="relative" style={{ width: '70vw' }}>
+      {/* Content wrapper */}
+      <div className="relative" style={{ width: contentWidth }}>
 
-        {/* ── Labels row — flush with photo edges, right above image ── */}
+        {/* ── Labels row ── */}
         <div className="flex justify-between items-baseline mb-3">
-          <span className="text-[11px] font-medium text-white/35 tracking-[0.25em] uppercase">
+          <span className={`${labelSize} font-medium text-white/35 tracking-[0.25em] uppercase`}>
             {String(index + 1).padStart(2, '0')} — {String(projects.length).padStart(2, '0')}
           </span>
-          <span className="text-[11px] font-medium text-white/35 tracking-[0.25em] uppercase">
+          <span className={`${labelSize} font-medium text-white/35 tracking-[0.25em] uppercase`}>
             {project.title}
           </span>
         </div>
 
-        {/* ── IMAGE FRAME ─────────────────────────────────────────── */}
+        {/* ── IMAGE FRAME ── */}
         <motion.div
           layoutId={`project-image-${project.id}`}
           className="relative w-full"
-          style={{ aspectRatio: '16 / 9', maxHeight: '68vh', overflow: 'hidden' }}
+          style={{ aspectRatio: '16 / 9', maxHeight, overflow: 'hidden' }}
           transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
           onMouseMove={onFrameMouseMove}
           onMouseLeave={onFrameMouseLeave}
         >
-          {/* Pixel displacement canvas — handles mouse interaction */}
-          <PixelCanvas
-            src={project.image}
-            alt={project.title}
-            className="absolute inset-0 w-full h-full"
-          />
+          {/* Pixel displacement canvas — disabled on mobile */}
+          {!isMobile ? (
+            <PixelCanvas
+              src={project.image}
+              alt={project.title}
+              className="absolute inset-0 w-full h-full"
+            />
+          ) : (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
-          {/* All overlays are pointer-events:none */}
+          {/* Overlays */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -70,14 +84,14 @@ function ProjectSection({ project, index }: { project: typeof projects[0]; index
           />
           <div className="photo-grain pointer-events-none" aria-hidden="true" />
 
-          {/* Title — centered, overlaid at bottom of image */}
-          <div className="absolute bottom-0 left-0 right-0 pb-14 z-10 flex justify-center px-4 pointer-events-none">
+          {/* Title */}
+          <div className="absolute bottom-0 left-0 right-0 pb-8 md:pb-14 z-10 flex justify-center px-4 pointer-events-none">
             <h2
               className="text-white uppercase text-center leading-[0.88]"
               style={{
                 fontFamily: 'var(--font-impact)',
                 fontWeight: 900,
-                fontSize: 'clamp(1.4rem, 4.2vw, 5rem)',
+                fontSize: isMobile ? 'clamp(1.2rem, 6vw, 3rem)' : 'clamp(1.4rem, 4.2vw, 5rem)',
                 letterSpacing: '0.08em',
               }}
             >
@@ -85,34 +99,36 @@ function ProjectSection({ project, index }: { project: typeof projects[0]; index
             </h2>
           </div>
 
-          {/* Glow layer — same text, masked to cursor position */}
-          <div
-            ref={glowRef}
-            className="absolute bottom-0 left-0 right-0 pb-14 z-20 flex justify-center px-4 pointer-events-none"
-            style={{ opacity: 0, transition: 'opacity 0.15s' }}
-          >
-            <h2
-              className="uppercase text-center leading-[0.88]"
-              style={{
-                fontFamily: 'var(--font-impact)',
-                fontWeight: 900,
-                fontSize: 'clamp(1.4rem, 4.2vw, 5rem)',
-                letterSpacing: '0.08em',
-                color: 'rgba(255,255,255,1)',
-                textShadow: '0 0 8px rgba(255,255,255,1), 0 0 24px rgba(255,255,255,0.9), 0 0 60px rgba(255,255,255,0.5)',
-                filter: 'brightness(1.4)',
-              }}
+          {/* Glow layer — desktop only */}
+          {!isMobile && (
+            <div
+              ref={glowRef}
+              className="absolute bottom-0 left-0 right-0 pb-14 z-20 flex justify-center px-4 pointer-events-none"
+              style={{ opacity: 0, transition: 'opacity 0.15s' }}
             >
-              {project.title}
-            </h2>
-          </div>
+              <h2
+                className="uppercase text-center leading-[0.88]"
+                style={{
+                  fontFamily: 'var(--font-impact)',
+                  fontWeight: 900,
+                  fontSize: 'clamp(1.4rem, 4.2vw, 5rem)',
+                  letterSpacing: '0.08em',
+                  color: 'rgba(255,255,255,1)',
+                  textShadow: '0 0 8px rgba(255,255,255,1), 0 0 24px rgba(255,255,255,0.9), 0 0 60px rgba(255,255,255,0.5)',
+                  filter: 'brightness(1.4)',
+                }}
+              >
+                {project.title}
+              </h2>
+            </div>
+          )}
         </motion.div>
 
-        {/* ── VIEW PROJECT button — overlapping the image bottom edge ── */}
-        <div className="flex justify-center relative z-10" style={{ marginTop: '-1.4rem' }}>
+        {/* ── VIEW PROJECT button ── */}
+        <div className="flex justify-center relative z-10" style={{ marginTop: buttonMargin }}>
           <Link
             to={`/portfolio/${project.id}`}
-            className="group/btn relative inline-flex items-center gap-3 border-2 border-white/65 rounded-full px-14 py-[1.1rem] text-sm font-medium uppercase tracking-[0.2em] text-white overflow-hidden transition-colors duration-300 hover:border-transparent"
+            className={`group/btn relative inline-flex items-center gap-3 border-2 border-white/65 rounded-full px-10 md:px-14 py-2 md:py-[1.1rem] text-xs md:text-sm font-medium uppercase tracking-[0.2em] text-white overflow-hidden transition-colors duration-300 hover:border-transparent`}
           >
             <span className="absolute inset-0 bg-accent-green rounded-full translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" />
             <span className="relative z-10 group-hover/btn:text-bg transition-colors duration-300">
@@ -131,8 +147,58 @@ function ProjectSection({ project, index }: { project: typeof projects[0]; index
 
 export default function PortfolioPage() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const bannerRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [bannerPos, setBannerPos] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Banner drag functionality for mobile
+  useEffect(() => {
+    if (!isMobile || !bannerRef.current) return
+
+    const handleMouseDown = (e: MouseEvent) => {
+      setIsDragging(true)
+      setDragStart({ x: e.clientX - bannerPos.x, y: e.clientY - bannerPos.y })
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return
+      setBannerPos({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y,
+      })
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+    }
+
+    const banner = bannerRef.current
+    banner?.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      banner?.removeEventListener('mousedown', handleMouseDown)
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [isMobile, isDragging, dragStart, bannerPos])
+
+  // Snap scroll only on desktop
+  useEffect(() => {
+    if (isMobile) return
+
     const el = scrollRef.current
     if (!el) return
 
@@ -180,29 +246,43 @@ export default function PortfolioPage() {
       el!.removeEventListener('wheel', onWheel)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <div ref={scrollRef} className="portfolio-snap-container">
       <div className="portfolio-grain" aria-hidden="true" />
 
       {/* Confidentiality notice banner */}
-      <div className="fixed top-16 left-1/2 -translate-x-1/2 z-40 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-10 py-6 max-w-4xl">
-        <p className="text-base text-white/70 text-center">
+      <div
+        ref={bannerRef}
+        className={`${isMobile ? 'cursor-grab active:cursor-grabbing' : ''} fixed z-40 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 md:px-10 py-4 md:py-6 max-w-2xl md:max-w-4xl`}
+        style={isMobile ? {
+          left: '50%',
+          top: '50%',
+          transform: `translate(calc(-50% + ${bannerPos.x}px), calc(-50% + ${bannerPos.y}px))`,
+        } : {
+          left: '50%',
+          top: '1rem',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        <p className="text-sm md:text-base text-white/70 text-center">
           <span className="text-accent-green font-semibold">Note:</span> Client names, logos, and personal details have been modified to protect confidentiality.
         </p>
       </div>
 
-      {/* Available badge — fixed bottom-left */}
-      <div className="fixed bottom-8 left-8 z-50 flex items-start gap-2.5">
-        <span className="mt-[3px] w-2 h-2 rounded-full bg-accent-green flex-shrink-0 animate-dot-blink" />
-        <span className="text-[12px] font-semibold text-white uppercase tracking-[0.15em] leading-[1.4]">
-          Currently Available<br />For New Projects
-        </span>
-      </div>
+      {/* Available badge — fixed bottom-left, hide on mobile */}
+      {!isMobile && (
+        <div className="fixed bottom-8 left-8 z-50 flex items-start gap-2.5">
+          <span className="mt-[3px] w-2 h-2 rounded-full bg-accent-green flex-shrink-0 animate-dot-blink" />
+          <span className="text-[12px] font-semibold text-white uppercase tracking-[0.15em] leading-[1.4]">
+            Currently Available<br />For New Projects
+          </span>
+        </div>
+      )}
 
       {projects.map((project, i) => (
-        <ProjectSection key={project.id} project={project} index={i} />
+        <ProjectSection key={project.id} project={project} index={i} isMobile={isMobile} />
       ))}
 
       {/* CTA section */}
