@@ -7,7 +7,7 @@ const navLinks = [
   { label: 'About', to: '/about' },
 ]
 
-const LOGO_TEXT = 'Carroll'
+const LOGO_TEXT = 'Cohesium'
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 function useScramble(target: string) {

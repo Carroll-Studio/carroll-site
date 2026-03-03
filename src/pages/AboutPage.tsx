@@ -46,7 +46,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-6 text-text-muted leading-relaxed text-lg">
                   <p>
-                    Carroll was founded on a simple belief: every small business
+                    Cohesium was founded on a simple belief: every small business
                     deserves a digital presence that matches the quality of what they
                     do. We&apos;ve spent years refining our craft to deliver exactly that.
                   </p>

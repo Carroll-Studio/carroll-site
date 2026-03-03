@@ -29,7 +29,7 @@ export default function MobileAboutPage() {
             </h2>
             <div className="space-y-4 text-sm text-text-muted leading-relaxed">
               <p>
-                Carroll was founded on a simple belief: every small business deserves a digital presence that matches the quality of what they do. We've spent years refining our craft to deliver exactly that.
+                Cohesium was founded on a simple belief: every small business deserves a digital presence that matches the quality of what they do. We've spent years refining our craft to deliver exactly that.
               </p>
               <p>
                 We're not a factory. We're a small, intentional team that partners closely with each client. We listen before we design. We understand before we build. And we don't stop until every detail is right.

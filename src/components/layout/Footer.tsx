@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <span className="font-display text-3xl font-bold">Carroll</span>
+            <span className="font-display text-3xl font-bold">Cohesium</span>
             <span className="text-bg/50 ml-0.5 text-3xl">.</span>
             <p className="mt-4 text-bg/70 max-w-sm leading-relaxed">
               A design studio crafting bold digital experiences for
@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-bg/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-bg/40">
-            &copy; {new Date().getFullYear()} Carroll. All rights reserved.
+            &copy; {new Date().getFullYear()} Cohesium. All rights reserved.
           </p>
 
           <motion.button
