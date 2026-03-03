@@ -25,7 +25,7 @@ export default function WebContactForm() {
     <FadeInSection>
       <form onSubmit={handleSubmit} className="space-y-16">
         {/* Row 1: Name + Email */}
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 gap-16">
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Name
@@ -51,7 +51,7 @@ export default function WebContactForm() {
         </div>
 
         {/* Row 2: Phone + Tell us about your project */}
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 gap-16">
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Phone
@@ -76,7 +76,7 @@ export default function WebContactForm() {
         </div>
 
         {/* Row 3: Company */}
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 gap-16">
           <div>
             <label className="text-xs uppercase tracking-widest font-semibold text-text-muted block mb-3">
               Company
